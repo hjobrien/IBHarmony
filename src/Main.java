@@ -10,7 +10,7 @@ public class Main {
 		System.out.println("Type \"q\" at any time to quit.");
 		PrintStream p = new PrintStream(new File("PersonalData.txt"));
 		boolean cont = true;
-		do {
+		while (cont == true) {
 			cont = ask("Name: ", console, p);
 			if (cont){
 				cont = ask("Grade: ", console, p);
@@ -26,7 +26,7 @@ public class Main {
 			}
 			System.out.println();
 			p.println();
-		} while (cont == true);
+		} 
 	}
 
 	private static void askQuestions(Scanner console, PrintStream p) {
