@@ -10,7 +10,7 @@ public class Main {
 		System.out.println("Type \"q\" at any time to quit.");
 		PrintStream p = new PrintStream(new File("PersonalData.txt"));
 		boolean cont = true;
-		do {
+		while (cont == true) {
 			cont = ask("Name: ", console, p);
 			if (cont){
 				cont = ask("Grade: ", console, p);
@@ -19,19 +19,14 @@ public class Main {
 					if (cont){
 						cont = ask("Preferred Gender: ", console, p);
 						if (cont){
-							askQuestions(console, p);
+							cont = ask("Type either 1 or 2, denoting the first or second choice: ", console, p);
 						}
 					}
 				}
 			}
 			System.out.println();
 			p.println();
-		} while (cont == true);
-	}
-
-	private static void askQuestions(Scanner console, PrintStream p) {
-		// TODO Auto-generated method stub
-		
+		} 
 	}
 
 	private static boolean ask(String s, Scanner console, PrintStream p) {
