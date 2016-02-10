@@ -19,7 +19,7 @@ public class Main {
 					if (cont){
 						cont = ask("Preferred Gender: ", console, p);
 						if (cont){
-							askQuestions(console, p);
+							cont = ask("Type either 1 or 2, denoting the first or second choice: ", console, p);
 						}
 					}
 				}
@@ -27,11 +27,6 @@ public class Main {
 			System.out.println();
 			p.println();
 		} 
-	}
-
-	private static void askQuestions(Scanner console, PrintStream p) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	private static boolean ask(String s, Scanner console, PrintStream p) {
