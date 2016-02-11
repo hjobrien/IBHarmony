@@ -179,7 +179,7 @@ public class DataEntry {
 				char p2GenderPref = p2.getGenderPreference();
 
 
-				if((!p1.isMatched() || !p2.isMatched()) && !p1Name.equals(p2Name) && p1Grade == p2Grade && p1Gender == p2GenderPref && p2Gender == p1GenderPref){
+				if(!p1.isMatched() && !p2.isMatched() && !p1Name.equals(p2Name) && p1Grade == p2Grade && p1Gender == p2GenderPref && p2Gender == p1GenderPref){
 					String p2Answers = p2.getAnswers();
 					for(int k = 0; k < NUM_QUESTIONS; k++){
 						if(p1Answers.charAt(k) == p2Answers.charAt(k)){
