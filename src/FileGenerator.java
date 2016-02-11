@@ -42,7 +42,7 @@ public class FileGenerator {
 		//checks to make sure the grade input is valid
 		if (s.contains("Grade")){
 			int gradeAsInt = Integer.parseInt(answer);
-			while (gradeAsInt < 9 || gradeAsInt > 12){
+			while (gradeAsInt < 9 || gradeAsInt > 12|| answer.equals("q")){
 				if (answer.toLowerCase().equals("q")){
 					return false;
 				}
@@ -54,7 +54,7 @@ public class FileGenerator {
 		
 		//checks to make sure the gender input is valid
 		if (s.contains("Gender")){
-			while (!answer.toLowerCase().equals("m") && !answer.toLowerCase().equals("f")){
+			while (!answer.toLowerCase().equals("m") && !answer.toLowerCase().equals("f")|| answer.equals("q")){
 				if (answer.toLowerCase().equals("q")){
 					return false;
 				}
@@ -65,16 +65,28 @@ public class FileGenerator {
 		
 		//checks to make sure the answer input is valid
 		if (s.contains("Type")){
-			while (answer.length() != NUM_QUESTIONS){
+			boolean allGood = checkAnswers(answer);
+			while (answer.length() != NUM_QUESTIONS || !allGood || answer.equals("q")){
 				if (answer.toLowerCase().equals("q")){
 					return false;
 				}
 				System.out.print("Please type again: ");
 				answer = console.nextLine();
+				allGood = checkAnswers(answer);
 			}
 		}
 				
 		p.print(answer + " ");
+		return true;
+	}
+
+	//makes sure that only 1s and 2s are entered
+	private static boolean checkAnswers(String answer) {
+		for (int i = 0; i < answer.length(); i++){
+			if (answer.charAt(i) != '1' && answer.charAt(i) != '2'){
+				return false;
+			}
+		}
 		return true;
 	}
 }
