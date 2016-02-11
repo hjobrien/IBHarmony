@@ -4,6 +4,9 @@ import java.io.PrintStream;
 import java.util.Scanner;
 
 public class FileGenerator {
+	
+	public static final int NUM_QUESTIONS = 9;
+	
 	public static void main(String[] args) throws FileNotFoundException{
 		Scanner console = new Scanner(System.in);
 		System.out.println("This program matches potential lovebirds. Please follow the instructions.");
@@ -35,12 +38,42 @@ public class FileGenerator {
 		if (answer.toLowerCase().equals("q")){
 			return false;
 		}
-		if (s.contains("Gender")){
-			if (!answer.toLowerCase().equals("m") && !answer.toLowerCase().equals("f")){
-				System.out.println("Please type again.");
-				
+	 	
+		//checks to make sure the grade input is valid
+		if (s.contains("Grade")){
+			int gradeAsInt = Integer.parseInt(answer);
+			while (gradeAsInt < 9 || gradeAsInt > 12){
+				if (answer.toLowerCase().equals("q")){
+					return false;
+				}
+				System.out.print("Please type again: ");
+				answer = console.nextLine();
+				gradeAsInt = Integer.parseInt(answer);
 			}
-		}	
+		}
+		
+		//checks to make sure the gender input is valid
+		if (s.contains("Gender")){
+			while (!answer.toLowerCase().equals("m") && !answer.toLowerCase().equals("f")){
+				if (answer.toLowerCase().equals("q")){
+					return false;
+				}
+				System.out.print("Please type again: ");
+				answer = console.nextLine();
+			}
+		}
+		
+		//checks to make sure the answer input is valid
+		if (s.contains("Type")){
+			while (answer.length() != NUM_QUESTIONS){
+				if (answer.toLowerCase().equals("q")){
+					return false;
+				}
+				System.out.print("Please type again: ");
+				answer = console.nextLine();
+			}
+		}
+				
 		p.print(answer + " ");
 		return true;
 	}
