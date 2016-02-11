@@ -1,9 +1,10 @@
 
 public class Person {
-	public static char gender, genderPreference;
-	public static int grade;
-	public static String answers;
-	public boolean matched = false;
+	private char gender, genderPreference;
+	private int grade;
+	private String answers;
+	private String name;
+	private boolean matched = false;
 
 	public Person(char gender, char genderPreference, int grade, String answers){
 		this.gender = gender;
@@ -26,19 +27,19 @@ public class Person {
 		this.matched = true;
 	}
 
-	public static char getGender() {
+	public char getGender() {
 		return gender;
 	}
 
-	public static char getGenderPreference() {
+	public char getGenderPreference() {
 		return genderPreference;
 	}
 
-	public static int getGrade() {
+	public int getGrade() {
 		return grade;
 	}
 
-	public static String getAnswers() {
+	public String getAnswers() {
 		return answers;
 	}
 
