@@ -35,6 +35,12 @@ public class FileGenerator {
 		if (answer.toLowerCase().equals("q")){
 			return false;
 		}
+		if (s.contains("Gender")){
+			if (!answer.toLowerCase().equals("m") && !answer.toLowerCase().equals("f")){
+				System.out.println("Please type again.");
+				
+			}
+		}	
 		p.print(answer + " ");
 		return true;
 	}
