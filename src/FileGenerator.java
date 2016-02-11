@@ -3,7 +3,7 @@ import java.io.FileNotFoundException;
 import java.io.PrintStream;
 import java.util.Scanner;
 
-public class Main {
+public class FileGenerator {
 	public static void main(String[] args) throws FileNotFoundException{
 		Scanner console = new Scanner(System.in);
 		System.out.println("This program matches potential lovebirds. Please follow the instructions.");
