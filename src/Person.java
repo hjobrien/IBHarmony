@@ -6,11 +6,12 @@ public class Person {
 	private String name;
 	private boolean matched = false;
 
-	public Person(char gender, char genderPreference, int grade, String answers){
+	public Person(char gender, char genderPreference, int grade, String answers, String name){
 		this.gender = gender;
 		this.genderPreference = genderPreference;
 		this.grade = grade;
 		this.answers = answers;
+		this.name = name;
 	}
 	
 	public int compare(Object o){
@@ -42,6 +43,11 @@ public class Person {
 	public String getAnswers() {
 		return answers;
 	}
+
+	public String getName() {
+		return name;
+	}
+
 
 	
 }

@@ -1,40 +1,62 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintStream;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class DataEntry {
 	//these values can be changed to reflect the quiz
-	public static final int NUM_QUESTIONS = 9;
+	public static final int NUM_QUESTIONS = 12;
 	//each number is the weight of that question, 1 is average (less important questions should have weight < 1, more important ones should be > 1
-	public static final int[] WEIGHTS = new int[]{1,1,1,1,1,1,1,1,1};
+	public static final int[] WEIGHTS = new int[]{3,2,1,1,1,1,1,3,3,1,2,2,1,1};
 	
 	public static void main(String[] args) throws FileNotFoundException{
+		ArrayList<Person> people = new ArrayList<Person>();
 		Scanner console = new Scanner(System.in);
 		System.out.println("This program matches potential lovebirds. Please follow the instructions.");
 		System.out.println("Type \"q\" at any time to quit and get matches.");
 		PrintStream p = new PrintStream(new File("PersonalData.txt"));
 		boolean cont = true;
+		String name;
+		int grade;
+		char gender;
+		char genderPref;
+		String answers;
 		while (cont == true) {
-			cont = ask("Name: ", console, p);
-			if (cont){
-				cont = ask("Grade: ", console, p);
-				if (cont){
-					cont = ask("Gender: ", console, p);
-					if (cont){
-						cont = ask("Preferred Gender: ", console, p);
-						if (cont){
-							cont = ask("Type either 1 or 2, denoting the first or second choice: ", console, p);
-						}
-					}
-				}
+			System.out.print("Name: ");
+			name = console.next();
+			System.out.print("Grade: ");
+			grade = console.nextInt();
+			System.out.print("Gender: ");
+			gender = console.next().charAt(0);
+			System.out.print("Gender Preference: ");
+			genderPref = console.next().charAt(0);
+			System.out.print("Answers: ");
+			answers = console.next();
+//			cont = ask("Name: ", console, p);
+//			if (cont){
+//				cont = ask("Grade: ", console, p);
+//				if (cont){
+//					cont = ask("Gender: ", console, p);
+//					if (cont){
+//						cont = ask("Preferred Gender: ", console, p);
+//						if (cont){
+//							cont = ask("Type either 1 or 2, denoting the first or second choice: ", console, p);
+//						}
+//					}
+//				}
+//			}
+			System.out.println("Quit? (y/n): ");
+			if(console.next().equals("y")){
+				cont = false;
 			}
 			System.out.println();
 			if(cont){
 				p.println();
 			}
+			people.add(new Person(gender, genderPref, grade, answers, name));
 		}
-		jCupid();
+		jCupid(people); //TODO: change
 	}
 
 	private static boolean ask(String s, Scanner console, PrintStream p) {
@@ -47,51 +69,67 @@ public class DataEntry {
 		return true;
 	}
 	
-	public static void jCupid(){
-		//this scanner takes each name in order from the file, this person is the person to be matched with someone else
-		Scanner fileReader = null;
-		try {
-			fileReader = new Scanner(new File("PersonalData.txt"));
-		} catch (FileNotFoundException e) {}
+	public static void jCupid(ArrayList<Person> eligibleCandidates){
+//		//this scanner takes each name in order from the file, this person is the person to be matched with someone else
+//		Scanner fileReader = null;
+//		try {
+//			fileReader = new Scanner(new File("PersonalData.txt"));
+//		} catch (FileNotFoundException e) {}
 		
 		
 		
-		while(fileReader.hasNextLine()){
-			//this scanner is reset for each name generated y the first one, it also gets each name from the file as a candidate for matching
-			Scanner fileReader2 = null;
-			try {
-				fileReader2 = new Scanner(new File("PersonalData.txt"));
-			} catch (FileNotFoundException e) {}
-			String[] p1Data = fileReader.nextLine().split(" ");
+//		while(fileReader.hasNextLine()){
+		for(int i = 0; i < eligibleCandidates.size(); i++){
+//			//this scanner is reset for each name generated y the first one, it also gets each name from the file as a candidate for matching
+//			Scanner fileReader2 = null;
+//			try {
+//				fileReader2 = new Scanner(new File("PersonalData.txt"));
+//			} catch (FileNotFoundException e) {}
+//			String[] p1Data = fileReader.nextLine().split(" ");
 			//the series of 1s or 2s that represent the answers to the questions
-			String p1Answers = p1Data[4];
-			String bestMatch = p1Data[0];
+			Person p1 = eligibleCandidates.get(i);
+			String p1Answers = p1.getAnswers();
+//			String bestMatch = eligibleCandidates.get(i).getName();
+			Person bestMatch = eligibleCandidates.get(i);
 			double goodFitCount = 0;
 			double max = -1;
 			
-			while(fileReader2.hasNextLine()){
+			for(int j = 0; j < eligibleCandidates.size(); j++){
+			Person p2 = eligibleCandidates.get(j);
+
+//			while(fileReader2.hasNextLine()){
 				goodFitCount = 0;
-				String[] p2Data = fileReader2.nextLine().split(" ");
+//				String[] p2Data = fileReader2.nextLine().split(" ");
 				/*checks for:
 				 * different names
 				 * same grade
 				 * if preferences line up (m,f -> f,m)
 				 */
-				if(!p1Data[0].equals(p2Data[0]) && p2Data[1].equals(p1Data[1]) && p2Data[2].equals(p1Data[3]) && p2Data[3].equals(p1Data[2])){
-					String p2Answers = p2Data[4];
-					for(int i = 0; i < NUM_QUESTIONS; i++){
-						if(p1Answers.charAt(i) == p2Answers.charAt(i)){
+				String p1Name = p1.getName();
+				String p2Name = p2.getName();
+				int p1Grade = p1.getGrade();
+				int p2Grade = p2.getGrade();
+				char p1Gender = p1.getGender();
+				char p2Gender = p2.getGender();
+				char p1GenderPref = p1.getGenderPreference();
+				char p2GenderPref = p2.getGenderPreference();
+
+
+				if(!p1Name.equals(p2Name) && p1Grade == p2Grade && p1Gender == p2GenderPref && p2Gender == p1GenderPref){
+					String p2Answers = p2.getAnswers();
+					for(int k = 0; k < NUM_QUESTIONS; k++){
+						if(p1Answers.charAt(k) == p2Answers.charAt(k)){
 							//increments the similarity index by the weight for each question (change weights at the top)
-							goodFitCount+=WEIGHTS[i];
+							goodFitCount+=WEIGHTS[k];
 						}
 					}
 					if(goodFitCount > max){
-						bestMatch = p2Data[0];
+						bestMatch = new Person(p2Gender, p2GenderPref, p2Grade, p2Answers, p2Name);
 						max = goodFitCount;
 					}
 				}
 			}
-			System.out.println(p1Data[0] + " " + bestMatch);
+			System.out.println(p1.getName() + " " + bestMatch.getName());
 			
 		}
 	}
