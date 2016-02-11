@@ -7,14 +7,16 @@ public class JCupid {
 	public static final int NUM_QUESTIONS = 9;
 	public static final int[] WEIGHTS = new int[]{1,1,1,1,1,1,1,1,1};
 	
+	public static final String fileName = "PersonalData.txt";
+	
 	public static void main(String[] args){
-		compare();
+		compare(fileName);
 	}
 	
-	public static void compare(){
+	public static void compare(String fileName){
 		Scanner fileReader = null;
 		try {
-			fileReader = new Scanner(new File("PersonalData.txt"));
+			fileReader = new Scanner(new File(fileName));
 		} catch (FileNotFoundException e) {}
 		
 		
@@ -22,7 +24,7 @@ public class JCupid {
 		while(fileReader.hasNextLine()){
 			Scanner fileReader2 = null;
 			try {
-				fileReader2 = new Scanner(new File("PersonalData.txt"));
+				fileReader2 = new Scanner(new File(fileName));
 			} catch (FileNotFoundException e) {}
 			String[] p1Data = fileReader.nextLine().split(" ");
 			String p1Answers = p1Data[4];
