@@ -47,7 +47,7 @@ public class JCupid {
 		
 		
 //		while(fileReader.hasNextLine()){
-		for(int i = 0; i < eligibleCandidates.size(); i++){
+		for(int i = eligibleCandidates.size()-1; i >=0; i--){
 //			//this scanner is reset for each name generated y the first one, it also gets each name from the file as a candidate for matching
 //			Scanner fileReader2 = null;
 //			try {
@@ -62,8 +62,8 @@ public class JCupid {
 			double goodFitCount = 0;
 			double max = -1;
 			
-			for(int j = 0; j < eligibleCandidates.size(); j++){
-			Person p2 = eligibleCandidates.get(j);
+			for(int j = eligibleCandidates.size()-1; j >= 0; j--){
+				Person p2 = eligibleCandidates.get(j);
 
 //			while(fileReader2.hasNextLine()){
 				goodFitCount = 0;
@@ -97,9 +97,11 @@ public class JCupid {
 					}
 				}
 			}
-			bestMatch.hasBeenMatched();
-			p1.hasBeenMatched();
-			System.out.println("\"" + p1.getName() + "\"-\"" + bestMatch.getName() + "\"");
+			eligibleCandidates.remove(i);
+			if (eligibleCandidates.indexOf(bestMatch) != -1){
+				eligibleCandidates.remove(eligibleCandidates.indexOf(bestMatch));
+			}
+			System.out.println("\"" + p1.getName() + "\"-\"" + bestMatch.getName() + "\"" + goodFitCount);
 			
 		}
 	}
