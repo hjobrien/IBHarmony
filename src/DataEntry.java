@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 public class DataEntry {
 	//these values can be changed to reflect the quiz
-	public static final int NUM_QUESTIONS = 12;
+	public static final int NUM_QUESTIONS = 14;
 	//each number is the weight of that question, 1 is average (less important questions should have weight < 1, more important ones should be > 1
 	public static final int[] WEIGHTS = new int[]{3,2,1,1,1,1,1,3,3,1,2,2,1,1};
 	
