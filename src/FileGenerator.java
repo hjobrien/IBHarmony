@@ -54,7 +54,7 @@ public class FileGenerator {
 		
 		//checks to make sure the gender input is valid
 		if (s.contains("Gender")){
-			while (!answer.toLowerCase().equals("m") && !answer.toLowerCase().equals("f")|| answer.equals("q")){
+			while ((!answer.toLowerCase().equals("m") && !answer.toLowerCase().equals("f"))|| answer.equals("q")){
 				if (answer.toLowerCase().equals("q")){
 					return false;
 				}
