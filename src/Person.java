@@ -6,7 +6,7 @@ public class Person {
 	private String name;
 	private boolean matched = false;
 
-	public Person(char gender, char genderPreference, int grade, String answers, String name){
+	public Person(String name, int grade, char gender, char genderPreference, String answers){
 		this.gender = gender;
 		this.genderPreference = genderPreference;
 		this.grade = grade;

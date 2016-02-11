@@ -17,57 +17,121 @@ public class DataEntry {
 		System.out.println("Type \"q\" at any time to quit and get matches.");
 		PrintStream p = new PrintStream(new File("PersonalData.txt"));
 		boolean cont = true;
-		String name;
-		int grade;
-		char gender;
-		char genderPref;
-		String answers;
+//		String name;
+//		int grade;
+//		char gender;
+//		char genderPref;
+//		String answers;
 		while (cont == true) {
-			System.out.print("Name: ");
-			name = console.next();
-			System.out.print("Grade: ");
-			grade = console.nextInt();
-			System.out.print("Gender: ");
-			gender = console.next().charAt(0);
-			System.out.print("Gender Preference: ");
-			genderPref = console.next().charAt(0);
-			System.out.print("Answers: ");
-			answers = console.next();
-//			cont = ask("Name: ", console, p);
-//			if (cont){
-//				cont = ask("Grade: ", console, p);
-//				if (cont){
-//					cont = ask("Gender: ", console, p);
-//					if (cont){
-//						cont = ask("Preferred Gender: ", console, p);
-//						if (cont){
-//							cont = ask("Type either 1 or 2, denoting the first or second choice: ", console, p);
-//						}
-//					}
-//				}
+//			System.out.print("Name: ");
+//			name = console.next();
+//			System.out.print("Grade: ");
+//			grade = console.nextInt();
+//			System.out.print("Gender: ");
+//			gender = console.next().charAt(0);
+//			System.out.print("Gender Preference: ");
+//			genderPref = console.next().charAt(0);
+//			System.out.print("Answers: ");
+//			answers = console.next();
+			cont = ask("Name: ", console, p);
+			if (cont){
+				cont = ask("Grade: ", console, p);
+				if (cont){
+					cont = ask("Gender: ", console, p);
+					if (cont){
+						cont = ask("Preferred Gender: ", console, p);
+						if (cont){
+							cont = ask("Type either 1 or 2, denoting the first or second choice: ", console, p);
+						}
+					}
+				}
+			}
+//			System.out.println("Quit? (y/n): ");
+//			if(console.next().equals("y")){
+//				cont = false;
 //			}
-			System.out.println("Quit? (y/n): ");
-			if(console.next().equals("y")){
-				cont = false;
-			}
 			System.out.println();
-			if(cont){
-				p.println();
-			}
-			people.add(new Person(gender, genderPref, grade, answers, name));
 		}
-		jCupid(people); //TODO: change
+		
+		jCupid(fileToList());
 	}
 
+	public static ArrayList<Person> fileToList(){
+		ArrayList<Person> people = new ArrayList<Person>();
+		Scanner fileReader = null;
+		try {
+			fileReader = new Scanner(new File("PersonalData.txt"));
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		while(fileReader.hasNextLine()){
+			people.add(new Person(fileReader.nextLine(), fileReader.nextInt(), fileReader.next().charAt(0), fileReader.next().charAt(0), fileReader.next()));
+		}
+		return people;
+	}
+	
 	private static boolean ask(String s, Scanner console, PrintStream p) {
 		System.out.print(s);
 		String answer = console.nextLine();
 		if (answer.toLowerCase().equals("q")){
 			return false;
 		}
-		p.print(answer + " ");
+		
+		if(s.contains("Name")){
+			answer += "\n";
+		}
+	 	
+		//checks to make sure the grade input is valid
+		if (s.contains("Grade")){
+			int gradeAsInt = Integer.parseInt(answer);
+			while (gradeAsInt < 9 || gradeAsInt > 12|| answer.equals("q")){
+				if (answer.toLowerCase().equals("q")){
+					return false;
+				}
+				System.out.print("Please type again: ");
+				answer = console.nextLine();
+				gradeAsInt = Integer.parseInt(answer);
+			}
+		}
+		
+		//checks to make sure the gender input is valid
+		if (s.contains("Gender")){
+			while ((!answer.toLowerCase().equals("m") && !answer.toLowerCase().equals("f"))|| answer.equals("q")){
+				if (answer.toLowerCase().equals("q")){
+					return false;
+				}
+				System.out.print("Please type again: ");
+				answer = console.nextLine();
+			}
+		}
+		
+		//checks to make sure the answer input is valid
+		if (s.contains("Type")){
+			boolean allGood = checkAnswers(answer);
+			while (answer.length() != NUM_QUESTIONS || !allGood || answer.equals("q")){
+				if (answer.toLowerCase().equals("q")){
+					return false;
+				}
+				System.out.print("Please type again: ");
+				answer = console.nextLine();
+				allGood = checkAnswers(answer);
+			}
+		}
+				
+		p.print(" " + answer);
 		return true;
 	}
+	
+	//makes sure that only 1s and 2s are entered
+	private static boolean checkAnswers(String answer) {
+		for (int i = 0; i < answer.length(); i++){
+			if (answer.charAt(i) != '1' && answer.charAt(i) != '2'){
+				return false;
+			}
+		}
+		return true;
+}
 	
 	public static void jCupid(ArrayList<Person> eligibleCandidates){
 //		//this scanner takes each name in order from the file, this person is the person to be matched with someone else
@@ -115,7 +179,7 @@ public class DataEntry {
 				char p2GenderPref = p2.getGenderPreference();
 
 
-				if(!p1Name.equals(p2Name) && p1Grade == p2Grade && p1Gender == p2GenderPref && p2Gender == p1GenderPref){
+				if((!p1.isMatched() || !p2.isMatched()) && !p1Name.equals(p2Name) && p1Grade == p2Grade && p1Gender == p2GenderPref && p2Gender == p1GenderPref){
 					String p2Answers = p2.getAnswers();
 					for(int k = 0; k < NUM_QUESTIONS; k++){
 						if(p1Answers.charAt(k) == p2Answers.charAt(k)){
@@ -124,12 +188,14 @@ public class DataEntry {
 						}
 					}
 					if(goodFitCount > max){
-						bestMatch = new Person(p2Gender, p2GenderPref, p2Grade, p2Answers, p2Name);
+						bestMatch = new Person(p2Name, p2Grade, p2Gender, p2GenderPref, p2Answers);
 						max = goodFitCount;
 					}
 				}
 			}
-			System.out.println(p1.getName() + " " + bestMatch.getName());
+			bestMatch.hasBeenMatched();
+			p1.hasBeenMatched();
+			System.out.println("\"" + p1.getName() + "\"-\"" + bestMatch.getName() + "\"");
 			
 		}
 	}
