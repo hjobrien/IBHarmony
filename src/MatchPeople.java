@@ -53,7 +53,7 @@ public class MatchPeople {
 	private String printUnpaired() {
 		String s = "";
 		if (unpaired.size() > 0){
-			s += "The following people were unpaired:\n";
+			s += "\nThe following people were unpaired:\n";
 			for (Person p : unpaired){
 				s += String.format("%20.20s ", p.getName());
 				s += String.format("\t %2.2s ", p.getGrade());
