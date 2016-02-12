@@ -5,24 +5,27 @@ import java.util.Scanner;
 
 public class FileGenerator {
 	
-	public static final int NUM_QUESTIONS = 9;
+	public static final int NUM_QUESTIONS = 14;
+	
+	public static final String fileName = "PersonalData.txt";
+
 	
 	public static void main(String[] args) throws FileNotFoundException{
 		Scanner console = new Scanner(System.in);
 		System.out.println("This program matches potential lovebirds. Please follow the instructions.");
-		System.out.println("Type \"q\" at any time to quit.");
-		PrintStream p = new PrintStream(new File("PersonalData.txt"));
+		System.out.println("Click \"enter/return\" with an empty input at any time to quit.");
+		PrintStream p = new PrintStream(new File(fileName));
 		boolean cont = true;
 		while (cont == true) {
-			cont = ask("Name: ", console, p);
+			cont = askName(console, p);
 			if (cont){
-				cont = ask("Grade: ", console, p);
+				cont = askGrade(console, p);
 				if (cont){
-					cont = ask("Gender: ", console, p);
+					cont = askGender(console, p);
 					if (cont){
-						cont = ask("Preferred Gender: ", console, p);
+						cont = askPreferredGender(console, p);
 						if (cont){
-							cont = ask("Type either 1 or 2, denoting the first or second choice: ", console, p);
+							cont = askAnswers(console, p);
 						}
 					}
 				}
@@ -32,51 +35,101 @@ public class FileGenerator {
 		} 
 	}
 
-	private static boolean ask(String s, Scanner console, PrintStream p) {
-		System.out.print(s);
+	private static boolean askAnswers(Scanner console, PrintStream p) {
+		System.out.print("Type either 1 or 2, denoting the first or second choice: ");
 		String answer = console.nextLine();
-		if (answer.toLowerCase().equals("q")){
+		if (answer.trim().length() == 0){
 			return false;
 		}
-	 	
-		//checks to make sure the grade input is valid
-		if (s.contains("Grade")){
-			int gradeAsInt = Integer.parseInt(answer);
-			while (gradeAsInt < 9 || gradeAsInt > 12|| answer.equals("q")){
-				if (answer.toLowerCase().equals("q")){
-					return false;
-				}
-				System.out.print("Please type again: ");
-				answer = console.nextLine();
-				gradeAsInt = Integer.parseInt(answer);
+		boolean allGood = checkAnswers(answer);
+		while (answer.length() != NUM_QUESTIONS || !allGood || answer.trim().length() == 0){
+			if (answer.trim().length() == 0){
+				return false;
 			}
+			System.out.print("Please type again: ");
+			answer = console.nextLine();
+			allGood = checkAnswers(answer);
 		}
 		
-		//checks to make sure the gender input is valid
-		if (s.contains("Gender")){
-			while ((!answer.toLowerCase().equals("m") && !answer.toLowerCase().equals("f"))|| answer.equals("q")){
-				if (answer.toLowerCase().equals("q")){
-					return false;
-				}
-				System.out.print("Please type again: ");
-				answer = console.nextLine();
-			}
-		}
-		
-		//checks to make sure the answer input is valid
-		if (s.contains("Type")){
-			boolean allGood = checkAnswers(answer);
-			while (answer.length() != NUM_QUESTIONS || !allGood || answer.equals("q")){
-				if (answer.toLowerCase().equals("q")){
-					return false;
-				}
-				System.out.print("Please type again: ");
-				answer = console.nextLine();
-				allGood = checkAnswers(answer);
-			}
-		}
-				
 		p.print(answer + " ");
+		return true;
+	}
+
+	private static boolean askPreferredGender(Scanner console, PrintStream p) {
+		System.out.print("Preferred Gender: ");
+		String answer = console.nextLine();
+		if (answer.trim().length() == 0){
+			return false;
+		}
+		while ((!answer.toLowerCase().equals("m") && !answer.toLowerCase().equals("f")) || answer.trim().length() == 0){
+			if (answer.trim().length() == 0){
+				return false;
+			}
+			System.out.print("Please type again: ");
+			answer = console.nextLine();
+		}
+		
+		p.print(answer + " ");
+		return true;
+	}
+
+	private static boolean askGender(Scanner console, PrintStream p) {
+		System.out.print("Gender: ");
+		String answer = console.nextLine();
+		if (answer.trim().length() == 0){
+			return false;
+		}
+		while ((!answer.toLowerCase().equals("m") && !answer.toLowerCase().equals("f")) || answer.trim().length() == 0){
+			if (answer.trim().length() == 0){
+				return false;
+			}
+			System.out.print("Please type again: ");
+			answer = console.nextLine();
+		}
+		
+		p.print(answer + " ");
+		return true;
+	}
+
+	//error checking for grades still isn't perfect
+	//if the user enters non-ints, the program doesn't process well
+	private static boolean askGrade(Scanner console, PrintStream p) {
+		System.out.print("Grade: ");
+		String answer = "0";
+		if (console.hasNextInt()){
+			answer = console.nextLine();
+		} else {
+			console.next();
+		}
+		if (answer.trim().length() == 0){
+			return false;
+		}
+		int gradeAsInt = Integer.parseInt(answer);
+		while (gradeAsInt < 9 || gradeAsInt > 12|| answer.trim().length() == 0){
+			if (answer.trim().length() == 0){
+				return false;
+			}
+			System.out.print("Please type again: ");
+			if (console.hasNextInt()){
+				answer = String.valueOf(console.nextInt());
+			} else {
+				console.next();
+			}
+			gradeAsInt = Integer.parseInt(answer);
+		}
+		
+		p.print(answer + " ");
+		return true;
+	}
+
+	private static boolean askName(Scanner console, PrintStream p) {
+		System.out.print("Name: ");
+		String answer = console.nextLine();
+		if (answer.trim().length() == 0){
+			return false;
+		}
+		
+		p.println(answer);
 		return true;
 	}
 
