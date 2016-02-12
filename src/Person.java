@@ -34,6 +34,8 @@ public class Person {
 	}
 
 	public boolean matchesWith(Person o){
+		//With my new code this shouldn't ever come up
+		//but i guess it's better safe than sorry
 		if (this.getName().equals(o.getName()))
 			return false;
 		
@@ -42,10 +44,15 @@ public class Person {
 		 */
 		if (this.getGrade() != o.getGrade())
 			return false;
+		
+		//these two shouldn't be changed unless we account for people
+		//who are open to either gender
 		if (this.getGender() != o.getGenderPreference())
 			return false;
 		if (this.getGenderPreference() != o.getGender())
 			return false;
+		
+		//if none of the above statements trigger:
 		return true;
 	}
 	
