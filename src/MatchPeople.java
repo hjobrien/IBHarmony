@@ -5,23 +5,18 @@ import java.util.Scanner;
 
 public class MatchPeople {
 	
-	public static /*final*/ int NUM_QUESTIONS /*= 14*/;
-	public static /*final*/ int[] WEIGHTS /*= new int[]{3,2,1,1,1,1,1,3,3,1,2,2,1,1}*/;
+	public static int num_qs;
+	public static int[] weights;
 	
-	public static /*final*/ String fileName = "FullInfo.txt";
+	public static String fileName;
 	
-//	public static void main(String[] args){
-//		jCupid(fileToList());
-//	}
-	
-	//If we wanted JCupid to just be a class
-	public MatchPeople(String file, int[] weights, int qs){
-		NUM_QUESTIONS = qs;
-		WEIGHTS = weights;
+	public MatchPeople(String file, int[] inWeights, int qs){
+		num_qs = qs;
+		weights = inWeights;
 		fileName = file;
 	}
 	
-	public /*static*/ ArrayList<Person> fileToList(){
+	public ArrayList<Person> fileToList(){
 		ArrayList<Person> people = new ArrayList<Person>();
 		Scanner fileReader = null;
 		try {
@@ -65,10 +60,11 @@ public class MatchPeople {
 			
 			if(p1.matchesWith(p2)){
 				String p2Answers = p2.getAnswers();
-				for(int k = 0; k < NUM_QUESTIONS; k++){
+				for(int k = 0; k < num_qs; k++){
 					if(p1Answers.charAt(k) == p2Answers.charAt(k)){
-						//increments the similarity index by the weight for each question (change weights at the top)
-						tempGoodFitCount+=WEIGHTS[k];
+						//increments the similarity index by the weight for each question 
+						//(change weights at the top)
+						tempGoodFitCount+=weights[k];
 					}
 				}
 				if(tempGoodFitCount > bestGoodFitCount){

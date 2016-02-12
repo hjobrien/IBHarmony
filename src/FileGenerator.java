@@ -4,18 +4,12 @@ import java.io.PrintStream;
 import java.util.Scanner;
 
 public class FileGenerator {
-	
-	public static /*final*/ int NUM_QUESTIONS /*= 14*/;
-	
-	public static /*final*/ String fileName /*= "PersonalData.txt"*/;
-
+		
 	public FileGenerator(int qs, String file) throws FileNotFoundException{
-		NUM_QUESTIONS = qs;
-		fileName = file;
 		Scanner console = new Scanner(System.in);
 		System.out.println("This program matches potential lovebirds. Please follow the instructions.");
 		System.out.println("Click \"enter/return\" with an empty input at any time to quit.");
-		PrintStream p = new PrintStream(new File(fileName));
+		PrintStream p = new PrintStream(new File(file));
 		boolean cont = true;
 		while (cont == true) {
 			cont = askName(console, p);
@@ -26,7 +20,7 @@ public class FileGenerator {
 					if (cont){
 						cont = askPreferredGender(console, p);
 						if (cont){
-							cont = askAnswers(console, p);
+							cont = askAnswers(console, p, qs);
 						}
 					}
 				}
@@ -36,39 +30,14 @@ public class FileGenerator {
 		} 
 	}
 	
-//	public static void main(String[] args) throws FileNotFoundException{
-//		Scanner console = new Scanner(System.in);
-//		System.out.println("This program matches potential lovebirds. Please follow the instructions.");
-//		System.out.println("Click \"enter/return\" with an empty input at any time to quit.");
-//		PrintStream p = new PrintStream(new File(fileName));
-//		boolean cont = true;
-//		while (cont == true) {
-//			cont = askName(console, p);
-//			if (cont){
-//				cont = askGrade(console, p);
-//				if (cont){
-//					cont = askGender(console, p);
-//					if (cont){
-//						cont = askPreferredGender(console, p);
-//						if (cont){
-//							cont = askAnswers(console, p);
-//						}
-//					}
-//				}
-//			}
-//			System.out.println();
-//			p.println();
-//		} 
-//	}
-
-	private static boolean askAnswers(Scanner console, PrintStream p) {
+	private static boolean askAnswers(Scanner console, PrintStream p, int num_qs) {
 		System.out.print("Type either 1 or 2, denoting the first or second choice: ");
 		String answer = console.nextLine();
 		if (answer.trim().length() == 0){
 			return false;
 		}
 		boolean allGood = checkAnswers(answer);
-		while (answer.length() != NUM_QUESTIONS || !allGood || answer.trim().length() == 0){
+		while (answer.length() != num_qs || !allGood || answer.trim().length() == 0){
 			if (answer.trim().length() == 0){
 				return false;
 			}
