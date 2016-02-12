@@ -15,7 +15,7 @@ public class JCupid {
 	
 	public static final String GENERATED_FILE_NAME = "PersonalData.txt";
 	public static final String TAKE_QUIZ_FILE_NAME = "InputData.txt";
-	public static final String PROCESSED_FILE_NAME = "PersonalData.txt";
+	public static final String PROCESSED_FILE_NAME = "FullData.txt";
 	
 	public static void main(String[] args) throws FileNotFoundException{
 		
