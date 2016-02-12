@@ -38,7 +38,7 @@ public class MatchPeople {
 		return people;
 	}
 	
-	public /*static*/ void jCupid(ArrayList<Person> eligibleCandidates){
+	public void run(ArrayList<Person> eligibleCandidates){
 		while (eligibleCandidates.size() > 1){
 			pairPeople(eligibleCandidates);
 		}

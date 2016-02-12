@@ -19,6 +19,6 @@ public class JCupid {
 		MatchPeople mp = new MatchPeople(processedFileName, WEIGHTS, NUM_QUESTIONS);
 		
 		//actually does the matching and processing
-		mp.jCupid(mp.fileToList());
+		mp.run(mp.fileToList());
 	}
 }
