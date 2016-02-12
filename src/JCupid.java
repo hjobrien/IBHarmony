@@ -38,71 +38,45 @@ public class JCupid {
 	}
 	
 	public static void jCupid(ArrayList<Person> eligibleCandidates){
-//		//this scanner takes each name in order from the file, this person is the person to be matched with someone else
-//		Scanner fileReader = null;
-//		try {
-//			fileReader = new Scanner(new File("PersonalData.txt"));
-//		} catch (FileNotFoundException e) {}
+		while (eligibleCandidates.size() > 1){
+			pairPeople(eligibleCandidates);
+		}
+		if (eligibleCandidates.size() == 1){
+			System.out.println("****" + eligibleCandidates.get(0).getName() + " could not be paired. ****");
+		}
+	}
+
+	private static void pairPeople(ArrayList<Person> eligibleCandidates) {
+		Person p1 = eligibleCandidates.get(0);
+		String p1Answers = p1.getAnswers();
+		Person bestMatch = eligibleCandidates.get(1);
+		int bestGoodFitCount = 0;
 		
-		
-		
-//		while(fileReader.hasNextLine()){
-		for(int i = eligibleCandidates.size()-1; i >=0; i--){
-//			//this scanner is reset for each name generated y the first one, it also gets each name from the file as a candidate for matching
-//			Scanner fileReader2 = null;
-//			try {
-//				fileReader2 = new Scanner(new File("PersonalData.txt"));
-//			} catch (FileNotFoundException e) {}
-//			String[] p1Data = fileReader.nextLine().split(" ");
-			//the series of 1s or 2s that represent the answers to the questions
-			Person p1 = eligibleCandidates.get(i);
-			String p1Answers = p1.getAnswers();
-//			String bestMatch = eligibleCandidates.get(i).getName();
-			Person bestMatch = eligibleCandidates.get(i);
-			double goodFitCount = 0;
-			double max = -1;
+		for(int j = 1; j < eligibleCandidates.size(); j++){
 			
-			for(int j = eligibleCandidates.size()-1; j >= 0; j--){
-				Person p2 = eligibleCandidates.get(j);
-
-//			while(fileReader2.hasNextLine()){
-				goodFitCount = 0;
-//				String[] p2Data = fileReader2.nextLine().split(" ");
-				/*checks for:
-				 * different names
-				 * same grade
-				 * if preferences line up (m,f -> f,m)
-				 */
-				String p1Name = p1.getName();
-				String p2Name = p2.getName();
-				int p1Grade = p1.getGrade();
-				int p2Grade = p2.getGrade();
-				char p1Gender = p1.getGender();
-				char p2Gender = p2.getGender();
-				char p1GenderPref = p1.getGenderPreference();
-				char p2GenderPref = p2.getGenderPreference();
-
-
-				if(!p1.isMatched() && !p2.isMatched() && !p1Name.equals(p2Name) && p1Grade == p2Grade && p1Gender == p2GenderPref && p2Gender == p1GenderPref){
-					String p2Answers = p2.getAnswers();
-					for(int k = 0; k < NUM_QUESTIONS; k++){
-						if(p1Answers.charAt(k) == p2Answers.charAt(k)){
-							//increments the similarity index by the weight for each question (change weights at the top)
-							goodFitCount+=WEIGHTS[k];
-						}
-					}
-					if(goodFitCount > max){
-						bestMatch = new Person(p2Name, p2Grade, p2Gender, p2GenderPref, p2Answers);
-						max = goodFitCount;
+			Person p2 = eligibleCandidates.get(j);
+			int tempGoodFitCount = 0;
+			
+			if(p1.matchesWith(p2)){
+				String p2Answers = p2.getAnswers();
+				for(int k = 0; k < NUM_QUESTIONS; k++){
+					if(p1Answers.charAt(k) == p2Answers.charAt(k)){
+						//increments the similarity index by the weight for each question (change weights at the top)
+						tempGoodFitCount+=WEIGHTS[k];
 					}
 				}
+				if(tempGoodFitCount > bestGoodFitCount){
+					bestMatch = eligibleCandidates.get(j);
+					bestGoodFitCount = tempGoodFitCount;
+				}
 			}
-			eligibleCandidates.remove(i);
-			if (eligibleCandidates.indexOf(bestMatch) != -1){
-				eligibleCandidates.remove(eligibleCandidates.indexOf(bestMatch));
-			}
-			System.out.println("\"" + p1.getName() + "\"-\"" + bestMatch.getName() + "\"" + goodFitCount);
-			
 		}
+		eligibleCandidates.remove(0);
+		eligibleCandidates.remove(eligibleCandidates.indexOf(bestMatch));
+		System.out.println(display(p1, bestMatch, bestGoodFitCount));
+	}
+
+	private static String display(Person p1, Person bestMatch, int fitCount) {
+		return String.format("%20.20s \t %d \t %s", p1.getName(), fitCount, bestMatch.getName());
 	}
 }

@@ -4,7 +4,7 @@ public class Person {
 	private int grade;
 	private String answers;
 	private String name;
-	private boolean matched = false;
+//	private boolean matched = false;
 
 	public Person(String name, int grade, char gender, char genderPreference, String answers){
 		this.gender = gender;
@@ -20,13 +20,13 @@ public class Person {
 		return 0;
 	}
 	
-	public boolean isMatched(){
-		return matched;
-	}
-	
-	public void hasBeenMatched(){
-		this.matched = true;
-	}
+//	public boolean isMatched(){
+//		return matched;
+//	}
+//	
+//	public void hasBeenMatched(){
+//		this.matched = true;
+//	}
 
 	public char getGender() {
 		return gender;
@@ -48,6 +48,16 @@ public class Person {
 		return name;
 	}
 
-
+	public boolean matchesWith(Person o){
+		if (this.getName().equals(o.getName()))
+			return false;
+		if (this.getGrade() != o.getGrade())
+			return false;
+		if (this.getGender() != o.getGenderPreference())
+			return false;
+		if (this.getGenderPreference() != o.getGender())
+			return false;
+		return true;
+	}
 	
 }
