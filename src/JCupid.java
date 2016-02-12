@@ -11,6 +11,7 @@ public class JCupid {
 //	public static final int[] WEIGHTS = new int[]{8,7,5,6,1,2,1,9,10,1,4,3,1,1};
 	
 	public static final String GENERATED_FILE_NAME = "PersonalData.txt";
+	public static final String TAKE_QUIZ_FILE_NAME = "InputData.txt";
 	public static final String PROCESSED_FILE_NAME = "PersonalData.txt";
 	
 	public static void main(String[] args) throws FileNotFoundException{
@@ -19,13 +20,22 @@ public class JCupid {
 		Scanner console = new Scanner(System.in);
 		System.out.print("Would you like to enter data? (y for yes) ");
 		if (console.nextLine().toLowerCase().equals("y")){
-			FileGenerator.genFile(NUM_QUESTIONS, GENERATED_FILE_NAME);
+			System.out.print("Would you like to take the quiz? (y for yes) ");
+			if (console.nextLine().toLowerCase().equals("y")){
+				Questionnaire.genFile(NUM_QUESTIONS, TAKE_QUIZ_FILE_NAME);
+			} else {	
+				FileGenerator.genFile(NUM_QUESTIONS, GENERATED_FILE_NAME);
+			}
 		}
 		
-		//creates the class that matches people together
-		MatchPeople mp = new MatchPeople(PROCESSED_FILE_NAME, WEIGHTS, NUM_QUESTIONS);
+		System.out.print("Would you like to process the data? (y for yes) ");
+		if (console.nextLine().toLowerCase().equals("y")){
 		
-		//actually does the matching and processing
-		mp.run(mp.fileToList());
+			//creates the class that matches people together
+			MatchPeople mp = new MatchPeople(PROCESSED_FILE_NAME, WEIGHTS, NUM_QUESTIONS);
+			
+			//actually does the matching and processing
+			mp.run(mp.fileToList());
+		}
 	}
 }
