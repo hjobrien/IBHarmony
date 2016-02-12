@@ -29,6 +29,30 @@ public class FileGenerator {
 			p.println();
 		} 
 	}
+	public static void genFile(int qs, String file) throws FileNotFoundException{
+		Scanner console = new Scanner(System.in);
+		System.out.println("This program matches potential lovebirds. Please follow the instructions.");
+		System.out.println("Click \"enter/return\" with an empty input at any time to quit.");
+		PrintStream p = new PrintStream(new File(file));
+		boolean cont = true;
+		while (cont == true) {
+			cont = askName(console, p);
+			if (cont){
+				cont = askGrade(console, p);
+				if (cont){
+					cont = askGender(console, p);
+					if (cont){
+						cont = askPreferredGender(console, p);
+						if (cont){
+							cont = askAnswers(console, p, qs);
+						}
+					}
+				}
+			}
+			System.out.println();
+			p.println();
+		} 
+	}
 	
 	private static boolean askAnswers(Scanner console, PrintStream p, int num_qs) {
 		System.out.print("Type either 1 or 2, denoting the first or second choice: ");
