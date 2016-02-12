@@ -41,6 +41,9 @@ public class MatchPeople {
 	}
 	
 	public void run(ArrayList<Person> eligibleCandidates){
+		System.out.println("\n");
+		System.out.println(String.format("%20.20s  %s\t %s", "Name of Person", "<3 Score", "Name of Match"));
+		System.out.println(String.format("%20.20s  %s", "", "out of " + weightSum()));
 		while (eligibleCandidates.size() > 1){
 			pairPeople(eligibleCandidates);
 		}
@@ -48,6 +51,14 @@ public class MatchPeople {
 			unpaired.add(eligibleCandidates.get(0));
 		}
 		System.out.println(printUnpaired());
+	}
+
+	private int weightSum() {
+		int sum = 0;
+		for (int i = 0; i < weights.length; i++){
+			sum += weights[i];
+		}
+		return sum;
 	}
 
 	private String printUnpaired() {
@@ -102,6 +113,6 @@ public class MatchPeople {
 	}
 
 	private static String display(Person p1, Person bestMatch, int fitCount) {
-		return String.format("%20.20s \t %d \t %s", p1.getName(), fitCount, bestMatch.getName());
+		return String.format("%20.20s \t %d\t%s", p1.getName(), fitCount, bestMatch.getName());
 	}
 }
