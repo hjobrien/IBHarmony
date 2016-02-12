@@ -36,6 +36,10 @@ public class Person {
 	public boolean matchesWith(Person o){
 		if (this.getName().equals(o.getName()))
 			return false;
+		
+		/*could easily be changed with this equation: 
+		 * if (Math.abs(this.getGrade() - o.getGrade()) > 1)
+		 */
 		if (this.getGrade() != o.getGrade())
 			return false;
 		if (this.getGender() != o.getGenderPreference())
