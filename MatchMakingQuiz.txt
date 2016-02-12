@@ -1,0 +1,14 @@
+Romance movie (1) or Action movie (2)?
+Do you keep secrets (1) or love to gossip (2)?
+Cats (1) or dogs (2)?
+Country music (1) or any other music (2)?
+What's your go to side order: Fries (1) or salad (2)?
+Watching sports (1) or playing sports (2)?
+Can money buy happiness? Yes (1) or no (2)?
+Favorite weekend activity: Hiking (1) or night on the town (2)?
+Movie and dinner (1) or Netflix and chill (2)?
+Warm weather (1) or cold weather (2)?
+Public displays of affection? Yes (1) or no (2)?
+Introvert (1) or extrovert (2)?
+Celebrity crush: Emma Stone (1) or Scarlett Johansson (2)?
+Books (1) or movies (2)?
