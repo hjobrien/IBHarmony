@@ -33,7 +33,7 @@ public class FileGenerator {
 	}
 	
 	private static boolean askAnswers(Scanner console, PrintStream p, int num_qs) {
-		System.out.print("Type either 1 or 2, denoting the first or second choice: ");
+		System.out.print("Type 1 for neither, 2 for 1st, 3 for 2nd, or 4 for both: ");
 		String answer = console.nextLine();
 		if (answer.trim().length() == 0){
 			return false;
@@ -131,7 +131,7 @@ public class FileGenerator {
 		return true;
 	}
 
-	//makes sure that only 1s and 2s are entered
+	//makes sure that only valid inputs are entered
 	private static boolean checkAnswers(String answer) {
 		for (int i = 0; i < answer.length(); i++){
 			if (answer.charAt(i) != '1' && answer.charAt(i) != '2' && answer.charAt(i) != '3' && answer.charAt(i) != '4'){
