@@ -123,8 +123,10 @@ public class DataEntry {
 			return false;
 		}
 		
+		Scanner num = new Scanner(answer);
 		int gradeAsInt = 0;
-		if (checkInt(answer)){
+		if (num.hasNextInt()){
+			answer = String.valueOf(num.nextInt());
 			gradeAsInt = Integer.parseInt(answer);
 		}
 		while (gradeAsInt < 9 || gradeAsInt > 12|| answer.trim().length() == 0){
@@ -136,18 +138,15 @@ public class DataEntry {
 			if (answer.trim().length() == 0){
 				return false;
 			}
-			if (checkInt(answer)){
+			num = new Scanner(answer);
+			if (num.hasNextInt()){
+				answer = String.valueOf(num.nextInt());
 				gradeAsInt = Integer.parseInt(answer);
 			}
 		}
 		
 		p.print(answer + " ");
 		return true;
-	}
-
-	private static boolean checkInt(String answer) {
-		Scanner num = new Scanner(answer);
-		return num.hasNextInt();
 	}
 
 	private static boolean askName(Scanner console, PrintStream p) {
