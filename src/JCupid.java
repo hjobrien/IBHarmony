@@ -10,6 +10,9 @@ public class JCupid {
 	public static final int[] WEIGHTS = new int[]{3,2,1,1,1,1,1,3,3,1,2,2,1,1};
 //	public static final int[] WEIGHTS = new int[]{8,7,5,6,1,2,1,9,10,1,4,3,1,1};
 	
+	public static final int LOWER_GRADE_BOUNDARY = 9;
+	public static final int UPPER_GRADE_BOUNDARY = 12;
+	
 	public static final String GENERATED_FILE_NAME = "PersonalData.txt";
 	public static final String TAKE_QUIZ_FILE_NAME = "InputData.txt";
 	public static final String PROCESSED_FILE_NAME = "PersonalData.txt";
@@ -22,9 +25,11 @@ public class JCupid {
 		if (console.nextLine().toLowerCase().equals("y")){
 			System.out.print("Would you like to take the quiz? (y for yes) ");
 			if (console.nextLine().toLowerCase().equals("y")){
-				Questionnaire.genFile(NUM_QUESTIONS, TAKE_QUIZ_FILE_NAME);
+				Questionnaire.genFile(NUM_QUESTIONS, TAKE_QUIZ_FILE_NAME, 
+						LOWER_GRADE_BOUNDARY, UPPER_GRADE_BOUNDARY);
 			} else {	
-				FileGenerator.genFile(NUM_QUESTIONS, GENERATED_FILE_NAME);
+				FileGenerator.genFile(NUM_QUESTIONS, GENERATED_FILE_NAME, 
+						LOWER_GRADE_BOUNDARY, UPPER_GRADE_BOUNDARY);
 			}
 		}
 		

@@ -3,14 +3,18 @@ import java.io.FileNotFoundException;
 import java.io.PrintStream;
 import java.util.Scanner;
 
-public class FileGenerator {
+public class Questionnaire {
 	
-	//don't even need a constructor
-	
+	public static final String QUIZ_QS = "MatchMakingQuiz.txt";
+
+//	public static void main(String[] args) throws FileNotFoundException {
+//		genFile(14, "InputData.txt");
+//	}
+
 	public static void genFile(int qs, String file, int minGrade, int maxGrade) throws FileNotFoundException{
 		Scanner console = new Scanner(System.in);
-		System.out.println("This program matches potential lovebirds. Please follow the instructions.");
-		System.out.println("Click \"enter/return\" with an empty input at any time to quit.");
+		System.out.println("\nThis program matches potential lovebirds. Please follow the instructions.");
+		System.out.println("Click \"enter/return\" with an empty input at any time to quit.\n");
 		PrintStream p = new PrintStream(new File(file));
 		boolean cont = true;
 		while (cont == true) {
@@ -22,7 +26,7 @@ public class FileGenerator {
 					if (cont){
 						cont = askPreferredGender(console, p);
 						if (cont){
-							cont = askAnswers(console, p, qs);
+							cont = askQuestions(console, p, qs, QUIZ_QS);
 						}
 					}
 				}
@@ -32,26 +36,6 @@ public class FileGenerator {
 		} 
 	}
 	
-	private static boolean askAnswers(Scanner console, PrintStream p, int num_qs) {
-		System.out.print("Type 0 for neither, 1 for 1st, 2 for 2nd, or 3 for both: ");
-		String answer = console.nextLine();
-		if (answer.trim().length() == 0){
-			return false;
-		}
-		boolean allGood = checkAnswers(answer);
-		while (answer.length() != num_qs || !allGood || answer.trim().length() == 0){
-			if (answer.trim().length() == 0){
-				return false;
-			}
-			System.out.print("Please type again: ");
-			answer = console.nextLine();
-			allGood = checkAnswers(answer);
-		}
-		
-		p.print(answer + " ");
-		return true;
-	}
-
 	private static boolean askPreferredGender(Scanner console, PrintStream p) {
 		System.out.print("Preferred Gender: ");
 		String answer = console.nextLine();
@@ -131,13 +115,35 @@ public class FileGenerator {
 		return true;
 	}
 
-	//makes sure that only valid inputs are entered
-	private static boolean checkAnswers(String answer) {
-		for (int i = 0; i < answer.length(); i++){
-			if (answer.charAt(i) != '1' && answer.charAt(i) != '2' && answer.charAt(i) != '3' && answer.charAt(i) != '0'){
+	private static boolean askQuestions(Scanner console, PrintStream p, int num_qs, String quizQs) throws FileNotFoundException {
+		Scanner file = new Scanner(new File(quizQs));
+		String answerList = "";
+		System.out.println("Please answer the following questions with appropriate responses.");
+		System.out.print("(Type 0 for neither or 3 for both)\n");
+		while (file.hasNextLine()){
+			System.out.print(file.nextLine() + " ");
+			String answer = console.nextLine();
+			if (answer.trim().length() == 0){
 				return false;
 			}
+			answerList += checkAnswer(answer, console);
 		}
+		
+		p.print(answerList);
 		return true;
+	}
+
+	//makes sure that only valid inputs are entered
+	//minor bug where if the first data entry is invalid and then the user tries to quit, 
+	//the program will count the answer as neither and continue. 
+	private static String checkAnswer(String answer, Scanner console) {
+		while ((answer.charAt(0) != '1' && answer.charAt(0) != '2' && answer.charAt(0) != '3' && answer.charAt(0) != '0')){
+			System.out.print("Please type again: ");
+			answer = console.nextLine();
+			if (answer.trim().length() == 0){
+				return "0";
+			}
+		}
+		return answer;
 	}
 }
