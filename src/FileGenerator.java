@@ -91,35 +91,38 @@ public class FileGenerator {
 		return true;
 	}
 
-	//error checking for grades still isn't perfect
-	//if the user enters non-ints, the program doesn't process well
 	private static boolean askGrade(Scanner console, PrintStream p) {
 		System.out.print("Grade: ");
-		String answer = "0";
-		if (console.hasNextInt()){
-			answer = console.nextLine();
-		} else {
-			console.next();
-		}
+		String answer = console.nextLine();
 		if (answer.trim().length() == 0){
 			return false;
 		}
-		int gradeAsInt = Integer.parseInt(answer);
+		
+		int gradeAsInt = 0;
+		if (checkInt(answer)){
+			gradeAsInt = Integer.parseInt(answer);
+		}
 		while (gradeAsInt < 9 || gradeAsInt > 12|| answer.trim().length() == 0){
 			if (answer.trim().length() == 0){
 				return false;
 			}
 			System.out.print("Please type again: ");
-			if (console.hasNextInt()){
-				answer = String.valueOf(console.nextInt());
-			} else {
-				console.next();
+			answer = console.nextLine();
+			if (answer.trim().length() == 0){
+				return false;
 			}
-			gradeAsInt = Integer.parseInt(answer);
+			if (checkInt(answer)){
+				gradeAsInt = Integer.parseInt(answer);
+			}
 		}
 		
 		p.print(answer + " ");
 		return true;
+	}
+
+	private static boolean checkInt(String answer) {
+		Scanner num = new Scanner(answer);
+		return num.hasNextInt();
 	}
 
 	private static boolean askName(Scanner console, PrintStream p) {
