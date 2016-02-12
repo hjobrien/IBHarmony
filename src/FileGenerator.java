@@ -156,7 +156,7 @@ public class FileGenerator {
 	//makes sure that only 1s and 2s are entered
 	private static boolean checkAnswers(String answer) {
 		for (int i = 0; i < answer.length(); i++){
-			if (answer.charAt(i) != '1' && answer.charAt(i) != '2'){
+			if (answer.charAt(i) != '1' && answer.charAt(i) != '2' && answer.charAt(i) != '3' && answer.charAt(i) != '4'){
 				return false;
 			}
 		}
