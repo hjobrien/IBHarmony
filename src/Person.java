@@ -4,7 +4,6 @@ public class Person {
 	private int grade;
 	private String answers;
 	private String name;
-//	private boolean matched = false;
 
 	public Person(String name, int grade, char gender, char genderPreference, String answers){
 		this.gender = gender;
@@ -13,20 +12,6 @@ public class Person {
 		this.answers = answers;
 		this.name = name;
 	}
-	
-	public int compare(Object o){
-		
-		//could return a score out of 100 maybe?
-		return 0;
-	}
-	
-//	public boolean isMatched(){
-//		return matched;
-//	}
-//	
-//	public void hasBeenMatched(){
-//		this.matched = true;
-//	}
 
 	public char getGender() {
 		return gender;

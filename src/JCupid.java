@@ -20,7 +20,6 @@ public class JCupid {
 		try {
 			fileReader = new Scanner(new File(fileName));
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		while(fileReader.hasNextLine()){
