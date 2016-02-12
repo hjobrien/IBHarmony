@@ -120,7 +120,9 @@ public class Questionnaire {
 		String answerList = "";
 		System.out.println("Please answer the following questions with appropriate responses.");
 		System.out.print("(Type 0 for neither or 3 for both)\n");
-		while (file.hasNextLine()){
+		int questionCount = 0;
+		while (file.hasNextLine() && questionCount < num_qs){
+			questionCount++;
 			System.out.print(file.nextLine() + " ");
 			String answer = console.nextLine();
 			if (answer.trim().length() == 0){

@@ -4,6 +4,7 @@ import java.util.Scanner;
 public class JCupid {
 	
 	//these values can be changed to reflect the quiz
+	//also can be less than the number of questions in the MatchMakingQuiz.txt file
 	public static final int NUM_QUESTIONS = 14;
 	
 	//each number is the weight of that question, 1 is average (less important questions should have weight < 1, more important ones should be > 1
