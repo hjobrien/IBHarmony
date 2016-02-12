@@ -10,6 +10,8 @@ public class MatchPeople {
 	
 	public static String fileName;
 	
+	public static ArrayList<Person> unpaired = new ArrayList<Person>();
+	
 	public MatchPeople(String file, int[] inWeights, int qs){
 		num_qs = qs;
 		weights = inWeights;
@@ -43,8 +45,23 @@ public class MatchPeople {
 			pairPeople(eligibleCandidates);
 		}
 		if (eligibleCandidates.size() == 1){
-			System.out.println("****" + eligibleCandidates.get(0).getName() + " could not be paired. ****");
+			unpaired.add(eligibleCandidates.get(0));
 		}
+		System.out.println(printUnpaired());
+	}
+
+	private String printUnpaired() {
+		String s = "";
+		if (unpaired.size() > 0){
+			s += "The following people were unpaired:\n";
+			for (Person p : unpaired){
+				s += String.format("%20.20s ", p.getName());
+				s += String.format("\t %2.2s ", p.getGrade());
+				s += p.getGender() + " ";
+				s += p.getGenderPreference() + "\n";
+			}
+		}
+		return s;
 	}
 
 	private static void pairPeople(ArrayList<Person> eligibleCandidates) {
@@ -73,13 +90,18 @@ public class MatchPeople {
 				}
 			}
 		}
-		eligibleCandidates.remove(0);
+		
 		if (bestGoodFitCount == 0){
-			System.out.println("****" + eligibleCandidates.get(0).getName() + " could not be paired. ****");
+			unpaired.add(eligibleCandidates.get(0));
+			eligibleCandidates.remove(0);
 		} else {
+			eligibleCandidates.remove(0);
 			eligibleCandidates.remove(eligibleCandidates.indexOf(bestMatch));
 			System.out.println(display(p1, bestMatch, bestGoodFitCount));
 		}
+		
+//		eligibleCandidates.remove(eligibleCandidates.indexOf(bestMatch));
+//		System.out.println(display(p1, bestMatch, bestGoodFitCount));
 	}
 
 	private static String display(Person p1, Person bestMatch, int fitCount) {
