@@ -1,78 +1,86 @@
+Casey
+12 F M 11122121122112
+Nell
+12 F M 11222221112112
+Ben Chamberlain
+12 M F 12221212212222
+Sihern Han
+12 M F 21221212111112
 Ridwan Mohammad
- 12 m f 21121112212122 
- Jasmine Emery
- 12 f m 22221122122212 
- Noah Coolman
- 12 m f 12221212221122 
- Briana Lincoln
- 12 f m 11221112111222 
- Kimbery Ong
- 12 f m 11221211212112 
- Akaash Shah
- 12 m f 21222211211222 
- Jennifer Dang
- 12 f m 11222112112222 
- Kyle Weber
- 12 m f 21111112212122 
- Melissa V
- 12 f m 22121222111112 
- Ian Geer
- 12 m f 21221221112222 
- Paula Fuentes
- 12 f m 21222122112222 
- Afomia Assefa
- 12 f m 11221112111222 
- Eli Stitchin
- 12 m f 22221221112221 
- Peyton Ulrich
- 12 m f 12122211111112 
- Melany B
- 12 f m 12222222111221 
- Yeju Jim
- 12 f m 21222122211122 
- Dennis Igawa
- 12 m f 21222222121212 
- Carissa Liau
- 12 f m 21221221212111 
- Conrad Spiekerman
- 12 m f 22122212111212 
- Dasan T
- 11 m f 21222222121212 
- Jeanette Leon
- 11 f m 11221122111112 
- Mohammad Hassan
- 11 m f 21221112221122 
- Marian Escalante 
- 11 f m 11221122211121 
- Leobarbo DeFranco
- 10 m f 21222212211121 
- Raena Haile
- 10 f m 21222212212121 
- Ben Brostrom
- 10 m f 21221122121121 
- Anastasiya Dobrydnyk
- 10 f m 11221212212122 
- Mitzi Alder-Wachter
- 11 f m 11222121112111 
- John O'brien
- 11 m f 21221111122112 
- Aisha Fuller
- 11 f m 21221212112222 
- Peik Goettling
- 11 m f 21221212211222 
- Lyric Ludke
- 11 f m 12122222112111 
- Mohammad flim
- 11 m f 21121122112112 
- Vienna Scheyer
- 11 f m 21122122121111 
- Zach Tucker
- 11 m f 21122212121122 
- Epi
- 11 m f 21212111221121 
- Jacob Barrett
- 11 m f 21121211222111 
- Marina 
- 11 f m 21221212111122 
- Eli Goldberg
- 11 m f 21222212221121
+12 m f 21121112212122 
+Jasmine Emery
+12 f m 22221122122212 
+Noah Coolman
+12 m f 12221212221122 
+Briana Lincoln
+12 f m 11221112111222 
+Kimbery Ong
+12 f m 11221211212112 
+Akaash Shah
+12 m f 21222211211222 
+Jennifer Dang
+12 f m 11222112112222 
+Kyle Weber
+12 m f 21111112212122 
+Melissa V
+12 f m 22121222111112 
+Ian Geer
+12 m f 21221221112222 
+Paula Fuentes
+12 f m 21222122112222 
+Afomia Assefa
+12 f m 11221112111222 
+Eli Stitchin
+12 m f 22221221112221 
+Peyton Ulrich
+12 m f 12122211111112 
+Melany B
+12 f m 12222222111221 
+Yeju Jim
+12 f m 21222122211122 
+Dennis Igawa
+12 m f 21222222121212 
+Carissa Liau
+12 f m 21221221212111
+Conrad Spiekerman
+12 m f 22122212111212 
+Dasan T
+11 m f 21222222121212 
+Jeanette Leon
+11 f m 11221122111112 
+Mohammad Hassan
+11 m f 21221112221122 
+Marian Escalante 
+11 f m 11221122211121 
+Leobarbo DeFranco
+10 m f 21222212211121 
+Raena Haile
+10 f m 21222212212121 
+Ben Brostrom
+10 m f 21221122121121 
+Anastasiya Dobrydnyk
+10 f m 11221212212122 
+Mitzi Alder-Wachter
+11 f m 11222121112111 
+John O'brien
+11 m f 21221111122112 
+Aisha Fuller
+11 f m 21221212112222 
+Peik Goettling
+11 m f 21221212211222 
+Lyric Ludke
+11 f m 12122222112111 
+Mohammad flim
+11 m f 21121122112112 
+Vienna Scheyer
+11 f m 21122122121111 
+Zach Tucker
+11 m f 21122212121122 
+Epi
+11 m f 21212111221121 
+Jacob Barrett
+11 m f 21121211222111 
+Marina 
+11 f m 21221212111122 
+Eli Goldberg
+11 m f 21222212221121

@@ -1,5 +1,6 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.PrintStream;
 import java.util.Scanner;
 
@@ -15,7 +16,8 @@ public class Questionnaire {
 		Scanner console = new Scanner(System.in);
 		System.out.println("\nThis program matches potential lovebirds. Please follow the instructions.");
 		System.out.println("Click \"enter/return\" with an empty input at any time to quit.\n");
-		PrintStream p = new PrintStream(new File(file));
+		PrintStream p = new PrintStream(
+			     new FileOutputStream(file, true));;
 		boolean cont = true;
 		while (cont == true) {
 			cont = askName(console, p);
@@ -32,7 +34,6 @@ public class Questionnaire {
 				}
 			}
 			System.out.println();
-			p.println();
 		} 
 	}
 	
@@ -111,7 +112,7 @@ public class Questionnaire {
 			return false;
 		}
 		
-		p.println(answer);
+		p.println("\n" + answer);
 		return true;
 	}
 
