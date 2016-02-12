@@ -15,7 +15,7 @@ public class DataEntry {
 	public static void main(String[] args) throws FileNotFoundException{
 		Scanner console = new Scanner(System.in);
 		System.out.println("This program matches potential lovebirds. Please follow the instructions.");
-		System.out.println("Type \"q\" at any time to quit and get matches.");
+		System.out.println("Click \"enter/return\" with an empty input at any time to quit.");
 		PrintStream p = new PrintStream(new File(fileName));
 		boolean cont = true;
 		while (cont == true) {
