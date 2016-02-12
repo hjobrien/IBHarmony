@@ -8,10 +8,6 @@ public class Questionnaire {
 	
 	public static final String QUIZ_QS = "MatchMakingQuiz.txt";
 
-//	public static void main(String[] args) throws FileNotFoundException {
-//		genFile(14, "InputData.txt");
-//	}
-
 	public static void genFile(int qs, String file, int minGrade, int maxGrade) throws FileNotFoundException{
 		Scanner console = new Scanner(System.in);
 		System.out.println("\nThis program matches potential lovebirds. Please follow the instructions.");
