@@ -119,7 +119,6 @@ public class FileGenerator {
 				gradeAsInt = Integer.parseInt(answer);
 			}
 		}
-		
 		p.print(answer + " ");
 		return true;
 	}
