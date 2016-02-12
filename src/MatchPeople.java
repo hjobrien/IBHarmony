@@ -99,9 +99,6 @@ public class MatchPeople {
 			eligibleCandidates.remove(eligibleCandidates.indexOf(bestMatch));
 			System.out.println(display(p1, bestMatch, bestGoodFitCount));
 		}
-		
-//		eligibleCandidates.remove(eligibleCandidates.indexOf(bestMatch));
-//		System.out.println(display(p1, bestMatch, bestGoodFitCount));
 	}
 
 	private static String display(Person p1, Person bestMatch, int fitCount) {

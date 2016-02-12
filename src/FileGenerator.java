@@ -4,31 +4,9 @@ import java.io.PrintStream;
 import java.util.Scanner;
 
 public class FileGenerator {
-		
-	public FileGenerator(int qs, String file) throws FileNotFoundException{
-//		Scanner console = new Scanner(System.in);
-//		System.out.println("This program matches potential lovebirds. Please follow the instructions.");
-//		System.out.println("Click \"enter/return\" with an empty input at any time to quit.");
-//		PrintStream p = new PrintStream(new File(file));
-//		boolean cont = true;
-//		while (cont == true) {
-//			cont = askName(console, p);
-//			if (cont){
-//				cont = askGrade(console, p);
-//				if (cont){
-//					cont = askGender(console, p);
-//					if (cont){
-//						cont = askPreferredGender(console, p);
-//						if (cont){
-//							cont = askAnswers(console, p, qs);
-//						}
-//					}
-//				}
-//			}
-//			System.out.println();
-//			p.println();
-//		} 
-	}
+	
+	//don't even need a constructor
+	
 	public static void genFile(int qs, String file) throws FileNotFoundException{
 		Scanner console = new Scanner(System.in);
 		System.out.println("This program matches potential lovebirds. Please follow the instructions.");
