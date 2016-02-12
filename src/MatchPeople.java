@@ -74,8 +74,12 @@ public class MatchPeople {
 			}
 		}
 		eligibleCandidates.remove(0);
-		eligibleCandidates.remove(eligibleCandidates.indexOf(bestMatch));
-		System.out.println(display(p1, bestMatch, bestGoodFitCount));
+		if (bestGoodFitCount == 0){
+			System.out.println("****" + eligibleCandidates.get(0).getName() + " could not be paired. ****");
+		} else {
+			eligibleCandidates.remove(eligibleCandidates.indexOf(bestMatch));
+			System.out.println(display(p1, bestMatch, bestGoodFitCount));
+		}
 	}
 
 	private static String display(Person p1, Person bestMatch, int fitCount) {

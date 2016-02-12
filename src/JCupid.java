@@ -9,11 +9,11 @@ public class JCupid {
 	public static final int[] WEIGHTS = new int[]{3,2,1,1,1,1,1,3,3,1,2,2,1,1};
 	
 	public static final String generatedFileName = "PersonalData.txt";
-	public static final String processedFileName = "PersonalData.txt";
+	public static final String processedFileName = "FullData.txt";
 	
 	public static void main(String[] args) throws FileNotFoundException{
 		//if you want to generate a file yourself
-		FileGenerator fg = new FileGenerator(NUM_QUESTIONS, generatedFileName);
+//		FileGenerator fg = new FileGenerator(NUM_QUESTIONS, generatedFileName);
 		
 		//creates the class that matches people together
 		MatchPeople mp = new MatchPeople(processedFileName, WEIGHTS, NUM_QUESTIONS);
