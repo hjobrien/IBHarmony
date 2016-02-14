@@ -38,7 +38,7 @@ public class JCupid {
 		if (console.nextLine().toLowerCase().equals("y")){
 		
 			//creates the class that matches people together
-			MatchPeople mp = new MatchPeople(PROCESSED_FILE_NAME, WEIGHTS, NUM_QUESTIONS);
+			MatchPeopleMethod1 mp = new MatchPeopleMethod1(PROCESSED_FILE_NAME, WEIGHTS, NUM_QUESTIONS);
 			
 			//actually does the matching and processing
 			mp.run(mp.fileToList());

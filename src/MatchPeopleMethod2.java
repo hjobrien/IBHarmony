@@ -3,7 +3,16 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class MatchPeople {
+public class MatchPeopleMethod2 {
+	
+	/*
+	 * This MatchPeople method iterates through every possible match a person can have, with the resulting
+	 * matchFitScore between two people and the people's names being stored in an ArrayList of Match objects.
+	 * After all the objects are created, the program will then iterate through each match and choose the 
+	 * one with the highest matchFitScore. Each element of the ArrayList that contained the people already 
+	 * chosen will be removed, and the program will iterate again. This process will continue until
+	 * the ArrayList does not have any matches remaining. 
+	 */
 	
 	public static int num_qs;
 	public static int[] weights;
@@ -12,7 +21,7 @@ public class MatchPeople {
 	
 	public static ArrayList<Person> unpaired = new ArrayList<Person>();
 	
-	public MatchPeople(String file, int[] inWeights, int qs){
+	public MatchPeopleMethod2(String file, int[] inWeights, int qs){
 		num_qs = qs;
 		weights = inWeights;
 		fileName = file;
@@ -77,7 +86,6 @@ public class MatchPeople {
 
 	private static void pairPeople(ArrayList<Person> eligibleCandidates) {
 		Person p1 = eligibleCandidates.get(0);
-		String p1Answers = p1.getAnswers();
 		Person bestMatch = eligibleCandidates.get(1);
 		int bestGoodFitCount = 0;
 		
@@ -87,14 +95,7 @@ public class MatchPeople {
 			int tempGoodFitCount = 0;
 			
 			if(p1.matchesWith(p2)){
-				String p2Answers = p2.getAnswers();
-				for(int k = 0; k < num_qs; k++){
-					if(p1Answers.charAt(k) == p2Answers.charAt(k)){
-						//increments the similarity index by the weight for each question 
-						//(change weights at the top)
-						tempGoodFitCount+=weights[k];
-					}
-				}
+				tempGoodFitCount = getGoodFitCount(p1, p2);
 				if(tempGoodFitCount > bestGoodFitCount){
 					bestMatch = eligibleCandidates.get(j);
 					bestGoodFitCount = tempGoodFitCount;
@@ -110,6 +111,20 @@ public class MatchPeople {
 			eligibleCandidates.remove(eligibleCandidates.indexOf(bestMatch));
 			System.out.println(display(p1, bestMatch, bestGoodFitCount));
 		}
+	}
+	
+	public static int getGoodFitCount(Person p1, Person p2) {
+		int tempGoodFitCount = 0;
+		String p1Answers = p1.getAnswers();
+		String p2Answers = p2.getAnswers();
+		for(int k = 0; k < num_qs; k++){
+			if(p1Answers.charAt(k) == p2Answers.charAt(k)){
+				//increments the similarity index by the weight for each question 
+				//(change weights at the top)
+				tempGoodFitCount+=weights[k];
+			}
+		}
+		return tempGoodFitCount;
 	}
 
 	private static String display(Person p1, Person bestMatch, int fitCount) {
