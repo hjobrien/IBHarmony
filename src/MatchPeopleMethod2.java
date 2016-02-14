@@ -21,9 +21,11 @@ public class MatchPeopleMethod2 {
 	 * same score is found, it will not currently overwrite the first match. This is changeable though.
 	 */
 	
+	public static boolean includeSumScore = false;
+	
 	public static int num_qs;
 	public static int[] weights;
-	public static int sumScore = 0;
+	public int sumScore = 0;
 	
 	public static String fileName;
 	
@@ -83,8 +85,9 @@ public class MatchPeopleMethod2 {
 			pairPeople(allMatches, eligibleCandidates);
 		}
 		
-		//prints out the total sum of all the love indexes
-//		System.out.println(sumScore);
+		if (includeSumScore){
+			System.out.println(sumScore);
+		}
 		
 		//after all the top pairs have been formed, the unpaired people are printed
 		p.println(printUnpaired(eligibleCandidates));
@@ -111,7 +114,10 @@ public class MatchPeopleMethod2 {
 			}
 		}
 		p.println(display(bestMatch));
-		this.sumScore += bestMatch.getMatchScore();
+		
+		if (includeSumScore){
+			this.sumScore += bestMatch.getMatchScore();
+		}
 		
 		for (int i = allMatches.size() - 1; i >= 0; i--){
 			if (checkForPeopleMatches(allMatches.get(i), bestMatch)){

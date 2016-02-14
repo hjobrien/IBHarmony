@@ -14,6 +14,7 @@ public class MatchPeopleMethod1 {
 	
 	 */
 	
+	public static boolean includeSumScore = false;
 	
 	public static int num_qs;
 	public static int[] weights;
@@ -61,8 +62,9 @@ public class MatchPeopleMethod1 {
 			pairPeople(eligibleCandidates);
 		}
 		
-		//prints out the total sum of all the love indexes
-//		System.out.println(sumScore);
+		if (includeSumScore){
+			System.out.println(sumScore);
+		}
 		
 		if (eligibleCandidates.size() == 1){
 			unpaired.add(eligibleCandidates.get(0));
