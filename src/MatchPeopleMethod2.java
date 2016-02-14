@@ -14,6 +14,12 @@ public class MatchPeopleMethod2 {
 	 * the ArrayList does not have any matches remaining. 
 	 */
 	
+	/*
+	 * NOTE***
+	 * this still slightly favors people who are higher on the list because if a match with the 
+	 * same score is found, it will not currently overwrite the first match. This is changeable though.
+	 */
+	
 	public static int num_qs;
 	public static int[] weights;
 	
@@ -65,9 +71,14 @@ public class MatchPeopleMethod2 {
 		System.out.println(String.format("%20.20s  %s\t %s", "Name of Person", "<3 Score", "Name of Match"));
 		System.out.println(String.format("%20.20s  %s", "", "out of " + weightSum()));
 		
+		//sorts and prints out the pairs
+		//manipulates the way java stores objects to allow the pairPeople method to be void while
+		//still altering the allMatches and eligibleCandidates ArrayLists
 		while (allMatches.size() > 0){
 			pairPeople(allMatches, eligibleCandidates);
 		}
+		
+		//after all the top pairs have been formed, the unpaired people are printed
 		System.out.println(printUnpaired(eligibleCandidates));
 	}
 
@@ -84,7 +95,9 @@ public class MatchPeopleMethod2 {
 		int highestMatchScore = -1;
 		for (Match m : allMatches){
 			int matchScore = m.getMatchScore();
-			if (matchScore > highestMatchScore){
+			
+			//changing > to >= would switch the favoring from top of the list to bottom
+			if (matchScore >/*=*/ highestMatchScore){
 				highestMatchScore = matchScore;
 				bestMatch = m;
 			}
