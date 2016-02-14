@@ -1,3 +1,4 @@
+package matching;
 
 public class Match {
 	private int matchScore;

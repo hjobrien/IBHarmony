@@ -1,3 +1,4 @@
+package matching;
 
 public class Person {
 	private char gender, genderPreference;

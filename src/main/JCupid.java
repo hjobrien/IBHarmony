@@ -1,5 +1,11 @@
+package main;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
+
+import dataEntry.FileGenerator;
+import dataEntry.Questionnaire;
+import matching.MatchPeopleMethod1;
+import matching.MatchPeopleMethod2;
 
 public class JCupid {
 	
