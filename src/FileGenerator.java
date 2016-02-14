@@ -16,13 +16,13 @@ public class FileGenerator extends asksQuestions {
 		PrintStream p = new PrintStream(new File(file));
 		boolean cont = true;
 		while (cont == true) {
-			cont = super.askName(console, p);
+			cont = askName(console, p);
 			if (cont){
-				cont = super.askGrade(console, p, minGrade, maxGrade);
+				cont = askGrade(console, p, minGrade, maxGrade);
 				if (cont){
-					cont = super.askGender(console, p);
+					cont = askGender(console, p);
 					if (cont){
-						cont = super.askPreferredGender(console, p);
+						cont = askPreferredGender(console, p);
 						if (cont){
 							cont = askAnswers(console, p, qs);
 						}

@@ -20,13 +20,13 @@ public class Questionnaire extends asksQuestions {
 			     new FileOutputStream(file, true));;
 		boolean cont = true;
 		while (cont == true) {
-			cont = super.askName(console, p);
+			cont = askName(console, p);
 			if (cont){
-				cont = super.askGrade(console, p, minGrade, maxGrade);
+				cont = askGrade(console, p, minGrade, maxGrade);
 				if (cont){
-					cont = super.askGender(console, p);
+					cont = askGender(console, p);
 					if (cont){
-						cont = super.askPreferredGender(console, p);
+						cont = askPreferredGender(console, p);
 						if (cont){
 							cont = askQuestions(console, p, qs, QUIZ_QS);
 						}
