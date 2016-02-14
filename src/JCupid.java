@@ -37,11 +37,17 @@ public class JCupid {
 		System.out.print("Would you like to process the data? (y for yes) ");
 		if (console.nextLine().toLowerCase().equals("y")){
 		
-			//creates the class that matches people together
-			MatchPeopleMethod1 mp = new MatchPeopleMethod1(PROCESSED_FILE_NAME, WEIGHTS, NUM_QUESTIONS);
+			//matches and process the data
+			MatchPeopleMethod1 mp1 = new MatchPeopleMethod1(PROCESSED_FILE_NAME, WEIGHTS, NUM_QUESTIONS);
 			
 			//actually does the matching and processing
-			mp.run(mp.fileToList());
+			mp1.run(mp1.fileToList());
+			
+			//matches and process the data
+			MatchPeopleMethod2 mp2 = new MatchPeopleMethod2(PROCESSED_FILE_NAME, WEIGHTS, NUM_QUESTIONS);
+			
+			//actually does the matching and processing
+			mp2.run(mp2.fileToList());
 		}
 	}
 }

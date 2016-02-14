@@ -18,9 +18,7 @@ public class MatchPeopleMethod2 {
 	public static int[] weights;
 	
 	public static String fileName;
-	
-	public static ArrayList<Person> unpaired = new ArrayList<Person>();
-	
+		
 	public MatchPeopleMethod2(String file, int[] inWeights, int qs){
 		num_qs = qs;
 		weights = inWeights;
@@ -50,16 +48,27 @@ public class MatchPeopleMethod2 {
 	}
 	
 	public void run(ArrayList<Person> eligibleCandidates){
+		
+		//generates the ArrayList of all the possible matches
+		ArrayList<Match> allMatches = new ArrayList<Match>();
+		for (int i = 0; i < eligibleCandidates.size() - 1; i++){
+			Person p1 = eligibleCandidates.get(i);
+			for (int j = i + 1; j < eligibleCandidates.size(); j++){
+				Person p2 = eligibleCandidates.get(j);
+				if(p1.matchesWith(p2)){
+					allMatches.add(new Match(p1, p2, weights));
+				}
+			}
+		}
+		
 		System.out.println("\n");
 		System.out.println(String.format("%20.20s  %s\t %s", "Name of Person", "<3 Score", "Name of Match"));
 		System.out.println(String.format("%20.20s  %s", "", "out of " + weightSum()));
-		while (eligibleCandidates.size() > 1){
-			pairPeople(eligibleCandidates);
+		
+		while (allMatches.size() > 0){
+			pairPeople(allMatches, eligibleCandidates);
 		}
-		if (eligibleCandidates.size() == 1){
-			unpaired.add(eligibleCandidates.get(0));
-		}
-		System.out.println(printUnpaired());
+		System.out.println(printUnpaired(eligibleCandidates));
 	}
 
 	private int weightSum() {
@@ -70,7 +79,53 @@ public class MatchPeopleMethod2 {
 		return sum;
 	}
 
-	private String printUnpaired() {
+	private void pairPeople(ArrayList<Match> allMatches, ArrayList<Person> eligibleCandidates) {
+		Match bestMatch = null;
+		int highestMatchScore = -1;
+		for (Match m : allMatches){
+			int matchScore = m.getMatchScore();
+			if (matchScore > highestMatchScore){
+				highestMatchScore = matchScore;
+				bestMatch = m;
+			}
+		}
+		System.out.println(display(bestMatch));
+		
+		for (int i = allMatches.size() - 1; i >= 0; i--){
+			if (checkForPeopleMatches(allMatches.get(i), bestMatch)){
+				allMatches.remove(i);
+			}
+		}
+		
+		eligibleCandidates.remove(eligibleCandidates.indexOf(bestMatch.getP2()));
+		eligibleCandidates.remove(eligibleCandidates.indexOf(bestMatch.getP1()));
+	}
+
+	private boolean checkForPeopleMatches(Match match, Match bestMatch) {	
+		Person p11 = match.getP1();
+		Person p12 = match.getP2();
+		
+		Person p21 = bestMatch.getP1();
+		Person p22 = bestMatch.getP2();
+		
+		if (p11.equals(p21)){
+			return true;
+		} else if (p11.equals(p22)){
+			return true;
+		} else if (p12.equals(p21)){
+			return true;
+		} else if (p12.equals(p22)){
+			return true;
+		}
+		
+		return false;
+	}
+
+	private static String display(Match m) {
+		return String.format("%20.20s \t %d\t%s", m.getP1().getName(), m.getMatchScore(), m.getP2().getName());
+	}
+
+	private String printUnpaired(ArrayList<Person> unpaired) {
 		String s = "";
 		if (unpaired.size() > 0){
 			s += "\nThe following people were unpaired:\n";
@@ -82,52 +137,5 @@ public class MatchPeopleMethod2 {
 			}
 		}
 		return s;
-	}
-
-	private static void pairPeople(ArrayList<Person> eligibleCandidates) {
-		Person p1 = eligibleCandidates.get(0);
-		Person bestMatch = eligibleCandidates.get(1);
-		int bestGoodFitCount = 0;
-		
-		for(int j = 1; j < eligibleCandidates.size(); j++){
-			
-			Person p2 = eligibleCandidates.get(j);
-			int tempGoodFitCount = 0;
-			
-			if(p1.matchesWith(p2)){
-				tempGoodFitCount = getGoodFitCount(p1, p2);
-				if(tempGoodFitCount > bestGoodFitCount){
-					bestMatch = eligibleCandidates.get(j);
-					bestGoodFitCount = tempGoodFitCount;
-				}
-			}
-		}
-		
-		if (bestGoodFitCount == 0){
-			unpaired.add(eligibleCandidates.get(0));
-			eligibleCandidates.remove(0);
-		} else {
-			eligibleCandidates.remove(0);
-			eligibleCandidates.remove(eligibleCandidates.indexOf(bestMatch));
-			System.out.println(display(p1, bestMatch, bestGoodFitCount));
-		}
-	}
-	
-	public static int getGoodFitCount(Person p1, Person p2) {
-		int tempGoodFitCount = 0;
-		String p1Answers = p1.getAnswers();
-		String p2Answers = p2.getAnswers();
-		for(int k = 0; k < num_qs; k++){
-			if(p1Answers.charAt(k) == p2Answers.charAt(k)){
-				//increments the similarity index by the weight for each question 
-				//(change weights at the top)
-				tempGoodFitCount+=weights[k];
-			}
-		}
-		return tempGoodFitCount;
-	}
-
-	private static String display(Person p1, Person bestMatch, int fitCount) {
-		return String.format("%20.20s \t %d\t%s", p1.getName(), fitCount, bestMatch.getName());
 	}
 }

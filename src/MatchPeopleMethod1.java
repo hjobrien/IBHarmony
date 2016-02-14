@@ -84,7 +84,7 @@ public class MatchPeopleMethod1 {
 
 	private static void pairPeople(ArrayList<Person> eligibleCandidates) {
 		Person p1 = eligibleCandidates.get(0);
-		Person bestMatch = eligibleCandidates.get(1);
+		Match bestMatch = null;
 		int bestGoodFitCount = 0;
 		
 		for(int j = 1; j < eligibleCandidates.size(); j++){
@@ -93,9 +93,10 @@ public class MatchPeopleMethod1 {
 			int tempGoodFitCount = 0;
 			
 			if(p1.matchesWith(p2)){
-				tempGoodFitCount = getGoodFitCount(p1, p2);
+				Match m = new Match(p1, p2, weights);
+				tempGoodFitCount = m.getMatchScore();
 				if(tempGoodFitCount > bestGoodFitCount){
-					bestMatch = eligibleCandidates.get(j);
+					bestMatch = m;
 					bestGoodFitCount = tempGoodFitCount;
 				}
 			}
@@ -106,8 +107,8 @@ public class MatchPeopleMethod1 {
 			eligibleCandidates.remove(0);
 		} else {
 			eligibleCandidates.remove(0);
-			eligibleCandidates.remove(eligibleCandidates.indexOf(bestMatch));
-			System.out.println(display(p1, bestMatch, bestGoodFitCount));
+			eligibleCandidates.remove(eligibleCandidates.indexOf(bestMatch.getP2()));
+			System.out.println(display(bestMatch));
 		}
 	}
 	
@@ -125,7 +126,7 @@ public class MatchPeopleMethod1 {
 		return tempGoodFitCount;
 	}
 
-	private static String display(Person p1, Person bestMatch, int fitCount) {
-		return String.format("%20.20s \t %d\t%s", p1.getName(), fitCount, bestMatch.getName());
+	private static String display(Match m) {
+		return String.format("%20.20s \t %d\t%s", m.getP1().getName(), m.getMatchScore(), m.getP2().getName());
 	}
 }
