@@ -1,5 +1,6 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -22,10 +23,14 @@ public class MatchPeopleMethod2 {
 	
 	public static int num_qs;
 	public static int[] weights;
+	public static int sumScore = 0;
 	
 	public static String fileName;
+	
+	public static PrintStream p;
 		
-	public MatchPeopleMethod2(String file, int[] inWeights, int qs){
+	public MatchPeopleMethod2(String file, int[] inWeights, int qs) throws FileNotFoundException{
+		p = new PrintStream(System.out);
 		num_qs = qs;
 		weights = inWeights;
 		fileName = file;
@@ -67,9 +72,9 @@ public class MatchPeopleMethod2 {
 			}
 		}
 		
-		System.out.println("\n");
-		System.out.println(String.format("%20.20s  %s\t %s", "Name of Person", "<3 Score", "Name of Match"));
-		System.out.println(String.format("%20.20s  %s", "", "out of " + weightSum()));
+		p.println("\n");
+		p.println(String.format("%20.20s  %s\t %s", "Name of Person", "<3 Score", "Name of Match"));
+		p.println(String.format("%20.20s  %s", "", "out of " + weightSum()));
 		
 		//sorts and prints out the pairs
 		//manipulates the way java stores objects to allow the pairPeople method to be void while
@@ -78,8 +83,11 @@ public class MatchPeopleMethod2 {
 			pairPeople(allMatches, eligibleCandidates);
 		}
 		
+		//prints out the total sum of all the love indexes
+//		System.out.println(sumScore);
+		
 		//after all the top pairs have been formed, the unpaired people are printed
-		System.out.println(printUnpaired(eligibleCandidates));
+		p.println(printUnpaired(eligibleCandidates));
 	}
 
 	private int weightSum() {
@@ -102,7 +110,8 @@ public class MatchPeopleMethod2 {
 				bestMatch = m;
 			}
 		}
-		System.out.println(display(bestMatch));
+		p.println(display(bestMatch));
+		this.sumScore += bestMatch.getMatchScore();
 		
 		for (int i = allMatches.size() - 1; i >= 0; i--){
 			if (checkForPeopleMatches(allMatches.get(i), bestMatch)){
@@ -135,7 +144,7 @@ public class MatchPeopleMethod2 {
 	}
 
 	private static String display(Match m) {
-		return String.format("%20.20s \t %d\t%s", m.getP1().getName(), m.getMatchScore(), m.getP2().getName());
+		return String.format("%20.20s \t %d \t%s", m.getP1().getName(), m.getMatchScore(), m.getP2().getName());
 	}
 
 	private String printUnpaired(ArrayList<Person> unpaired) {

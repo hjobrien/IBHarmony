@@ -1,5 +1,6 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -10,16 +11,21 @@ public class MatchPeopleMethod1 {
 	 * person and subsequently removing their pair. The drawback to this design is that it does not ensure
 	 * that each person is matched to their best fit, only that the first person is. The lower down the list
 	 * someone is, the less chance they have of being paired with their best match.
+	
 	 */
+	
 	
 	public static int num_qs;
 	public static int[] weights;
+	public int sumScore;
 	
 	public static String fileName;
 	
 	public static ArrayList<Person> unpaired = new ArrayList<Person>();
+	public static PrintStream p;
 	
-	public MatchPeopleMethod1(String file, int[] inWeights, int qs){
+	public MatchPeopleMethod1(String file, int[] inWeights, int qs) throws FileNotFoundException{
+		p = new PrintStream(System.out);
 		num_qs = qs;
 		weights = inWeights;
 		fileName = file;
@@ -48,16 +54,20 @@ public class MatchPeopleMethod1 {
 	}
 	
 	public void run(ArrayList<Person> eligibleCandidates){
-		System.out.println("\n");
-		System.out.println(String.format("%20.20s  %s\t %s", "Name of Person", "<3 Score", "Name of Match"));
-		System.out.println(String.format("%20.20s  %s", "", "out of " + weightSum()));
+		p.println("\n");
+		p.println(String.format("%20.20s  %s\t %s", "Name of Person", "<3 Score", "Name of Match"));
+		p.println(String.format("%20.20s  %s", "", "out of " + weightSum()));
 		while (eligibleCandidates.size() > 1){
 			pairPeople(eligibleCandidates);
 		}
+		
+		//prints out the total sum of all the love indexes
+//		System.out.println(sumScore);
+		
 		if (eligibleCandidates.size() == 1){
 			unpaired.add(eligibleCandidates.get(0));
 		}
-		System.out.println(printUnpaired());
+		p.println(printUnpaired());
 	}
 
 	private int weightSum() {
@@ -82,7 +92,7 @@ public class MatchPeopleMethod1 {
 		return s;
 	}
 
-	private static void pairPeople(ArrayList<Person> eligibleCandidates) {
+	private void pairPeople(ArrayList<Person> eligibleCandidates) {
 		Person p1 = eligibleCandidates.get(0);
 		Match bestMatch = null;
 		int bestGoodFitCount = 0;
@@ -102,16 +112,20 @@ public class MatchPeopleMethod1 {
 			}
 		}
 		
+		if (bestGoodFitCount != 0){
+			sumScore += bestMatch.getMatchScore();
+		}
+		
 		if (bestGoodFitCount == 0){
 			unpaired.add(eligibleCandidates.get(0));
 			eligibleCandidates.remove(0);
 		} else {
 			eligibleCandidates.remove(0);
 			eligibleCandidates.remove(eligibleCandidates.indexOf(bestMatch.getP2()));
-			System.out.println(display(bestMatch));
+			p.println(display(bestMatch));
 		}
 	}
-	
+
 	public static int getGoodFitCount(Person p1, Person p2) {
 		int tempGoodFitCount = 0;
 		String p1Answers = p1.getAnswers();
