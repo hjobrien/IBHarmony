@@ -12,7 +12,7 @@ public class MatchPeopleMethod1 extends MatchPeople{
 	
 	 */
 		
-	public MatchPeopleMethod1(String file, int[] inWeights, int qs) throws FileNotFoundException{
+	public MatchPeopleMethod1(String file, ArrayList<Integer> inWeights, int qs) throws FileNotFoundException{
 		super(file, inWeights, qs);
 	}
 	

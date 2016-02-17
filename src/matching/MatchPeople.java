@@ -10,14 +10,14 @@ public class MatchPeople {
 	public static boolean includeSumScore = false;
 	
 	public static int num_qs;
-	public static int[] weights;
+	public static ArrayList<Integer> weights;
 	public int sumScore;
 	
 	public static String fileName;
 	
 	public static PrintStream p;
 	
-	public MatchPeople(String file, int[] inWeights, int qs) throws FileNotFoundException{
+	public MatchPeople(String file, ArrayList<Integer> inWeights, int qs) throws FileNotFoundException{
 		p = new PrintStream(System.out);
 		num_qs = qs;
 		weights = inWeights;
@@ -48,8 +48,8 @@ public class MatchPeople {
 	
 	public int weightSum() {
 		int sum = 0;
-		for (int i = 0; i < weights.length; i++){
-			sum += weights[i];
+		for (int i = 0; i < weights.size(); i++){
+			sum += weights.get(i);
 		}
 		return sum;
 	}	
