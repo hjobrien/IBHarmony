@@ -17,9 +17,9 @@ public class MatchPeople {
 	
 	public static PrintStream p;
 	
-	public MatchPeople(String file, ArrayList<Integer> inWeights, int qs) throws FileNotFoundException{
+	public MatchPeople(String file, ArrayList<Integer> inWeights) throws FileNotFoundException{
 		p = new PrintStream(System.out);
-		num_qs = qs;
+		num_qs = inWeights.size();
 		weights = inWeights;
 		fileName = file;
 	}
@@ -70,5 +70,9 @@ public class MatchPeople {
 			}
 		}
 		return s;
+	}
+	
+	public void run(ArrayList<Person> eligibleCandidates){
+		
 	}
 }

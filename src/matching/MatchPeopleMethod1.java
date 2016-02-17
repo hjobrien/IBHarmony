@@ -12,8 +12,8 @@ public class MatchPeopleMethod1 extends MatchPeople{
 	
 	 */
 		
-	public MatchPeopleMethod1(String file, ArrayList<Integer> inWeights, int qs) throws FileNotFoundException{
-		super(file, inWeights, qs);
+	public MatchPeopleMethod1(String file, ArrayList<Integer> inWeights) throws FileNotFoundException{
+		super(file, inWeights);
 	}
 	
 	public void run(ArrayList<Person> eligibleCandidates){

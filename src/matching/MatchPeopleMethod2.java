@@ -19,8 +19,8 @@ public class MatchPeopleMethod2 extends MatchPeople{
 	 * same score is found, it will not currently overwrite the first match. This is changeable though.
 	 */
 		
-	public MatchPeopleMethod2(String file, ArrayList<Integer> inWeights, int qs) throws FileNotFoundException{
-		super(file, inWeights, qs);
+	public MatchPeopleMethod2(String file, ArrayList<Integer> inWeights) throws FileNotFoundException{
+		super(file, inWeights);
 	}
 	
 	public void run(ArrayList<Person> eligibleCandidates){
